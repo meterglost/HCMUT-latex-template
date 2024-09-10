@@ -1,0 +1,11 @@
+version: "3"
+
+tasks:
+  build:
+    internal: true
+    requires:
+      vars: [TEMPLATE_NAME]
+    preconditions:
+      - test -d build/{{.TEMPLATE_NAME}} || mkdir -p build/{{.TEMPLATE_NAME}}
+    cmds:
+      - tectonic -X compile templates/{{.TEMPLATE_NAME}}/main.tex --outdir build/{{.TEMPLATE_NAME}}/ -Z shell-escape -Z search-path=resources/ --synctex --keep-logs --keep-intermediates

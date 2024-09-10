@@ -1,0 +1,5 @@
+version: "3"
+
+includes:
+  build: ./build/
+  dist: ./dist/

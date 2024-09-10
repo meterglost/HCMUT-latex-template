@@ -1,0 +1,9 @@
+version: "3"
+
+tasks:
+  dist:
+    internal: true
+    requires:
+      vars: [TEMPLATE_NAME]
+    cmds:
+      - 7zz a -tzip dist/{{.TEMPLATE_NAME}}.zip templates/{{.TEMPLATE_NAME}}/* resources/*

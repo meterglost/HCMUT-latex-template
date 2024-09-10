@@ -1,0 +1,12 @@
+*               text=auto eof=lf
+
+Dockerfile      text linguist-language=Dockerfile
+Dockerfile.*    text linguist-language=Dockerfile
+
+# Font
+*.ttf   binary
+*.otf   binary
+
+# Image
+*.png   binary
+*.jpg   binary
