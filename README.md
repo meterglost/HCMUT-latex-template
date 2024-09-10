@@ -1,0 +1,1 @@
+# HCMUT LaTeX template
