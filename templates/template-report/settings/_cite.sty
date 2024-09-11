@@ -1,0 +1,11 @@
+% \usepackage{glossaries}
+% \DeclareLanguageMapping{vietnamese}{english} % Fall back to English
+
+\usepackage[backend=biber,style=ieee]{biblatex}
+
+\setlength\bibitemsep{0.5\baselineskip}
+
+\addbibresource{content/reference.bib}
+
+\AddToHook{cmd/printbibliography/before}{\sloppy\hbadness 10000\relax}
+\AddToHook{cmd/printbibliography/after}{\fussy}
