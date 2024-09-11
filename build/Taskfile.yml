@@ -9,3 +9,17 @@ tasks:
       - test -d build/{{.TEMPLATE_NAME}} || mkdir -p build/{{.TEMPLATE_NAME}}
     cmds:
       - tectonic -X compile templates/{{.TEMPLATE_NAME}}/main.tex --outdir build/{{.TEMPLATE_NAME}}/ -Z shell-escape -Z search-path=resources/ --synctex --keep-logs --keep-intermediates
+
+  report:
+    desc: Compile report template to PDF
+    vars:
+      TEMPLATE_NAME: template-report
+    sources:
+      - resources/**/*
+      - templates/{{.TEMPLATE_NAME}}/**/*
+    generates:
+      - build/{{.TEMPLATE_NAME}}/**/*
+    cmds:
+      - task: build
+        vars:
+          TEMPLATE_NAME: "{{.TEMPLATE_NAME}}"
