@@ -23,3 +23,17 @@ tasks:
       - task: build
         vars:
           TEMPLATE_NAME: "{{.TEMPLATE_NAME}}"
+
+  thesis:
+    desc: Compile thesis template to PDF
+    vars:
+      TEMPLATE_NAME: template-thesis
+    sources:
+      - resources/**/*
+      - templates/{{.TEMPLATE_NAME}}/**/*
+    generates:
+      - build/{{.TEMPLATE_NAME}}/**/*
+    cmds:
+      - task: build
+        vars:
+          TEMPLATE_NAME: "{{.TEMPLATE_NAME}}"

@@ -21,3 +21,17 @@ tasks:
       - task: dist
         vars:
           TEMPLATE_NAME: "{{.TEMPLATE_NAME}}"
+
+  thesis:
+    desc: Pack thesis template to Zip archive
+    vars:
+      TEMPLATE_NAME: template-thesis
+    sources:
+      - resources/**/*
+      - templates/{{.TEMPLATE_NAME}}/**/*
+    generates:
+      - dist/{{.TEMPLATE_NAME}}.zip
+    cmds:
+      - task: dist
+        vars:
+          TEMPLATE_NAME: "{{.TEMPLATE_NAME}}"
