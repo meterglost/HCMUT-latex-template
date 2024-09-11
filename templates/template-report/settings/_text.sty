@@ -1,0 +1,62 @@
+\usepackage{fontspec}
+\usepackage[nil,bidi=default]{babel}
+
+\babelprovide[import, language=default]{vietnamese}
+\babelprovide[import, language=Default, main]{english}
+
+\babelfont{rm}[
+    Path        = fonts/,
+    Extension   = .ttf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic,
+]{IBMPlexSerif}
+
+\babelfont{sf}[
+    Path        = fonts/,
+    Extension   = .ttf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic,
+]{SourceSansPro}
+
+\babelfont{tt}[
+    Path        = fonts/,
+    Extension   = .ttf,
+    UprightFont     = *-Regular,
+    BoldFont        = *-Bold,
+    ItalicFont      = *-Italic,
+    BoldItalicFont  = *-BoldItalic,
+]{JetBrainsMono}
+
+\usepackage{iflang}
+
+\usepackage[fixed]{fontawesome5}
+
+\usepackage{xurl}
+\usepackage{xhfill}
+
+\usepackage{microtype}
+\usepackage[onehalfspacing]{setspace}
+\usepackage[tocskip=0.5em]{parskip}
+
+% \usepackage{tcolorbox}
+% \tcbuselibrary{minted}
+% \tcbset{
+%     on line,
+%     boxsep=4pt, left=0pt,right=0pt,top=0pt,bottom=0pt,
+%     colframe=white, colback=LightPink,
+%     % highlight math style={enhanced}
+% }
+% \newtcbox{\highlighttext}{
+%     on line,
+%     left=0pt, right=0pt, top=0pt, bottom=0pt,
+%     boxsep=4pt,
+%     colframe=white, colback=LightPink,
+% }
+
+\usepackage[figure,table]{totalcount}
+
+\usepackage[math]{blindtext} % Generate meaningless text for testing

@@ -1,0 +1,29 @@
+\PassOptionsToClass{
+    subject = {{...}},
+    project = {{...}},
+    % author = ,
+    % passwd = ,
+}{HCMUT-Report}
+
+\documentclass{HCMUT-Report}
+
+\begin{document}
+
+\pagestyle{blank}
+\pagenumbering{gobble}
+
+\input{content/titlepage.tex}
+
+\pagestyle{plain}
+\pagenumbering{roman}
+
+\input{content/summary.tex}
+
+\pagestyle{content}
+\pagenumbering{arabic}
+
+\input{content/content.tex}
+
+% \input{content/reference.tex}
+
+\end{document}

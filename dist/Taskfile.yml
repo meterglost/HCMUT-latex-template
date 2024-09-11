@@ -7,3 +7,17 @@ tasks:
       vars: [TEMPLATE_NAME]
     cmds:
       - 7zz a -tzip dist/{{.TEMPLATE_NAME}}.zip templates/{{.TEMPLATE_NAME}}/* resources/*
+
+  report:
+    desc: Pack report template to Zip archive
+    vars:
+      TEMPLATE_NAME: template-report
+    sources:
+      - resources/**/*
+      - templates/{{.TEMPLATE_NAME}}/**/*
+    generates:
+      - dist/{{.TEMPLATE_NAME}}.zip
+    cmds:
+      - task: dist
+        vars:
+          TEMPLATE_NAME: "{{.TEMPLATE_NAME}}"
