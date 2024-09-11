@@ -1,0 +1,33 @@
+\PassOptionsToClass{
+    subject = {{Graduation Thesis}},
+    project = ...,
+    % author = ,
+    % passwd = ,
+}{HCMUT-Thesis}
+
+\documentclass{HCMUT-Thesis}
+
+\begin{document}
+
+\selectlanguage{english}
+
+\pagestyle{blank}
+\pagenumbering{gobble}
+
+\input{content/titlepage.tex}
+
+\cleardoublepage
+\pagestyle{plain}
+\pagenumbering{roman}
+
+\input{content/summary.tex}
+
+\cleardoublepage
+\pagestyle{content}
+\pagenumbering{arabic}
+
+\input{content/content.tex}
+
+% \input{content/reference.tex}
+
+\end{document}

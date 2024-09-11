@@ -1,0 +1,130 @@
+% ==================== Define localized variables ====================
+
+\IfLanguageName{english}{
+    \newcommand{\university}{VIETNAM NATIONAL UNIVERSITY - HO CHI MINH CITY \\ HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY}
+    \newcommand{\faculty}{FACULTY OF COMPUTER SCIENCE \& ENGINEERING}
+
+    \newcommand{\majorname}{Major}
+    \newcommand{\major}{\dotfill}
+
+    \newcommand{\instructorsname}{Instructor(s)}
+    \newcommand{\instructors}{%
+        \dotfill
+
+        \dotfill
+    }
+
+    \newcommand{\implementersname}{Implementer(s)}
+    \newcommand{\implementers}{%
+        \dotfill
+
+        \dotfill
+
+        \dotfill
+
+        \dotfill
+    }
+
+    \newcommand{\location}{Ho Chi Minh City}
+    \newcommand{\datetime}{Aug 2024}
+}{}
+
+\IfLanguageName{vietnamese}{
+    \newcommand{\university}{ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH \\ TRƯỜNG ĐẠI HỌC BÁCH KHOA}
+    \newcommand{\faculty}{KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH}
+
+    \newcommand{\majorname}{Chuyên ngành}
+    \newcommand{\major}{\dotfill}
+
+    \newcommand{\instructorsname}{Người hướng dẫn}
+    \newcommand{\instructors}{%
+        \dotfill
+
+        \dotfill
+    }
+
+    \newcommand{\implementersname}{Người thực hiện}
+    \newcommand{\implementers}{%
+        \dotfill
+
+        \dotfill
+
+        \dotfill
+
+        \dotfill
+    }
+
+    \newcommand{\location}{Thành phố Hồ Chí Minh}
+    \newcommand{\datetime}{tháng 8 năm 2024}
+}{}
+
+% ==================== Title page template ====================
+
+\providecommand{\university}{UNIVERSITY...}
+\providecommand{\faculty}{FACULTY...}
+
+
+\providecommand{\majorname}{Major}
+\providecommand{\major}{...}
+\providecommand{\instructorsname}{Instructor(s)}
+\providecommand{\instructors}{...}
+\providecommand{\implementersname}{Implementer(s)}
+\providecommand{\implementers}{...}
+
+\providecommand{\location}{...location...}
+\providecommand{\datetime}{...month... / ...year...}
+
+\clearpage
+
+\begin{titlepage}
+    \centering
+
+    \begingroup
+        \fontshape{up}\fontseries{b}\selectfont
+        \Large\MakeUppercase\university
+    \endgroup
+
+    \begingroup
+        \fontshape{up}\fontseries{m}\selectfont
+        \MakeUppercase\faculty
+    \endgroup
+
+    \vspace{64pt}
+
+    \includegraphics[height=5cm]{images/logo.png}
+
+    \vspace{64pt}
+
+    \begingroup
+        \fontshape{up}\fontseries{m}\selectfont
+        \MakeUppercase\pdfsubject
+    \endgroup
+
+    \parbox[c][\baselineskip]{\textwidth}{\vfill\rule{\textwidth}{0.5pt}\vfill}
+
+    \begingroup
+        \fontshape{it}\fontseries{b}\selectfont
+        \Large\MakeUppercase\pdfproject
+    \endgroup
+
+    \parbox[c][\baselineskip]{\textwidth}{\vfill\rule{\textwidth}{0.5pt}\vfill}
+
+    \begin{minipage}{0.8\linewidth}
+        \begin{tblr}{X[3,l,h]X[7,l,h]}
+            {\majorname}        & {\major}
+            \\\\
+            {\instructorsname}  & {\instructors}
+            \\\\
+            {\implementersname} & {\implementers}
+        \end{tblr}
+    \end{minipage}
+
+    \vfill
+
+    \begingroup
+        \location, \datetime
+    \endgroup
+
+\end{titlepage}
+
+\clearpage
