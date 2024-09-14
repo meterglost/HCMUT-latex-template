@@ -5,8 +5,10 @@ tasks:
     internal: true
     requires:
       vars: [TEMPLATE_NAME]
+    preconditions:
+      - rm -f dist/{{.TEMPLATE_NAME}}.zip
     cmds:
-      - 7zz a -tzip dist/{{.TEMPLATE_NAME}}.zip templates/{{.TEMPLATE_NAME}}/* resources/*
+      - 7zz a -tzip dist/{{.TEMPLATE_NAME}}.zip ./templates/{{.TEMPLATE_NAME}}/* ./resources/*
 
   report:
     desc: Pack report template to Zip archive
