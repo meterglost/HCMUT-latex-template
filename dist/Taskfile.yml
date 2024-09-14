@@ -5,6 +5,8 @@ tasks:
     internal: true
     requires:
       vars: [TEMPLATE_NAME]
+    preconditions:
+      - rm -f dist/{{.TEMPLATE_NAME}}.zip
     cmds:
       - 7zz a -tzip dist/{{.TEMPLATE_NAME}}.zip ./templates/{{.TEMPLATE_NAME}}/* ./resources/*
 
