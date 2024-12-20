@@ -1,5 +1,2 @@
 build/*
 dist/*
-
-!build/Taskfile.yml
-!dist/Taskfile.yml
