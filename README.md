@@ -1,18 +1,17 @@
 # HCMUT LaTeX template
 
-This project provides several Latex report templates which are written using mordern packages and technologies for better support of dual-language (English + Vietnamese)
+This project provides several LaTeX templates written using mordern packages and technologies for better compatibility with Vietnamese.
 
 ## Templates
 
--   Graduation thesis
--   Course project report
+-   [Graduation thesis](./templates/template-thesis/README.md)
+-   [Course project report](./templates/template-report/README.md)
 
 ## Features
 
 -   Style is aligned with common standards (layout, text, ...)
 -   Support colorized hyperlink
 -   Support embed image, math, code with highlighting
--   Support dual-language (English + Vietnamese)
 -   Support setting PDF metadatas, password-based encryption
 -   Provide styled common components/pages
 -   ... and many other out-of-the-box features are preconfigured
@@ -24,7 +23,7 @@ Each template is packed up into a zip archive. Download at release page.
 ### For Overleaf users
 
 -   Upload the template
--   Change Overleaf compiler option to `XeLaTex`
+-   Change Overleaf compiler option to `XeLaTeX`
 
 ## Options
 
@@ -36,4 +35,4 @@ Each template is written as a LaTeX document class with several options for quic
 > -   Options need to be set through `PassOptionsToClass` or will fail to compile
 > -   Value contains spaces need to be wrapped around with double braces to avoid space trimming.
 >
-> All these annoying will be solved after fully migrating to LaTeX3.
+> All these annoying will be resolved after fully migrating to LaTeX3.
