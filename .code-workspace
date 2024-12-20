@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+		    "path": "./templates/template-report/"
+		},
+		{
+		    "path": "./templates/template-thesis/"
+		},
+		{
+			"path": "./resources/"
+		},
+	]
+}
