@@ -3,36 +3,27 @@
 {
 	"name": "Latex",
 	"build": {
-		// Sets the run context to one level up instead of the .devcontainer folder.
 		"context": "..",
-		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-		"dockerfile": "../Dockerfile.dev"
+		"dockerfile": "Dockerfile"
 	},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Uncomment the next line to run commands after the container is created.
-	// "onCreateCommand": "",
-
-	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"efoerster.texlab",
-				"task.vscode-task",
+				"redhat.vscode-yaml",
 				"esbenp.prettier-vscode"
 			],
 			"settings": {
-				"editor.formatOnSave": true,
 				"prettier.requireConfig": true,
 
 				"[json][jsonc][markdown][yaml]": {
-					"editor.defaultFormatter": "esbenp.prettier-vscode"
+					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.formatOnSave": true
 				},
 
-				"task": {
-					"outputTo": "terminal"
+				"[tex][latex][bibtex]": {
+					"editor.wordWrap": "on"
 				}
 			}
 		}

@@ -1,7 +1,4 @@
-*               text=auto eof=lf
-
-Dockerfile      text linguist-language=Dockerfile
-Dockerfile.*    text linguist-language=Dockerfile
+*       text=auto eof=lf
 
 # Font
 *.ttf   binary
