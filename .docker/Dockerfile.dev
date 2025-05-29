@@ -1,0 +1,14 @@
+FROM base
+
+ADD https://github.com/go-task/task/releases/latest/download/task_linux_amd64.tar.gz /tmp/task.tar.gz
+RUN tar -xzf /tmp/task.tar.gz -C /usr/local/bin/ && rm /tmp/task.tar.gz
+
+ADD https://github.com/latex-lsp/texlab/releases/latest/download/texlab-x86_64-linux.tar.gz /tmp/texlab.tar.gz
+RUN tar -xzf /tmp/texlab.tar.gz -C /usr/local/bin/ && rm /tmp/texlab.tar.gz
+
+ADD https://github.com/WGUNDERWOOD/tex-fmt/releases/latest/download/tex-fmt-x86_64-linux.tar.gz /tmp/tex-fmt.tar.gz
+RUN tar -xzf /tmp/tex-fmt.tar.gz -C /usr/local/bin/ && rm /tmp/tex-fmt.tar.gz
+
+RUN apt-get -qq update && \
+    apt-get -q install -y --no-install-recommends 7zip && \
+    apt-get -qq clean && rm -rf /var/lib/apt/lists/*

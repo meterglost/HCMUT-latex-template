@@ -1,0 +1,30 @@
+FROM docker.io/rust:1-slim-bookworm AS build
+
+RUN apt-get -qq update && \
+    apt-get -q install -y --no-install-recommends libfontconfig-dev libgraphite2-dev libicu-dev libssl-dev zlib1g-dev && \
+    apt-get -q install -y --no-install-recommends gcc g++ && \
+    apt-get -qq clean && rm -rf /var/lib/apt/lists/*
+
+RUN cargo install -q --git https://github.com/tectonic-typesetting/tectonic.git tectonic
+
+#
+
+FROM docker.io/debian:bookworm-slim AS base
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_PRIORITY=critical
+
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    LANGUAGE=C.UTF-8
+
+RUN apt-get -qq update && \
+    apt-get -q install -y --no-install-recommends libfontconfig1 libgraphite2-3 libicu72 libssl3 zlib1g && \
+    apt-get -q install -y --no-install-recommends ca-certificates lcdf-typetools python3-pygments && \
+    apt-get -qq clean && rm -rf /var/lib/apt/lists/*
+
+
+COPY --from=build /usr/local/cargo/bin/tectonic /usr/local/bin/tectonic
+
+ADD https://sourceforge.net/projects/biblatex-biber/files/biblatex-biber/2.17/binaries/Linux/biber-linux_x86_64.tar.gz/download /tmp/biber.tar.gz
+RUN tar -xzf /tmp/biber.tar.gz -C /usr/local/bin/ && rm /tmp/biber.tar.gz

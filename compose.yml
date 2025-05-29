@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+name: latex-templates
+
+services:
+  base:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.base
+    image: latex-templates-base
+    pull_policy: never
+
+  build:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.build
+    #   additional_contexts:
+    #     base: service:base
+    image: latex-templates-build
+    pull_policy: never
+    working_dir: /workspace/templates/
+    volumes:
+      - ./latex-template.taskfile.yml:/workspace/latex-template.taskfile.yml:ro
+      - ./taskfile.yml:/workspace/taskfile.yml:ro
+      - ./templates/:/workspace/templates/:ro
+      - ./resources/:/workspace/resources/:ro
+      - ./build/:/workspace/build/:rw
+    entrypoint: task compile
+
+  dist:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.dist
+    image: latex-templates-dist
+    pull_policy: never
+    working_dir: /workspace/templates/
+    volumes:
+      - ./latex-template.taskfile.yml:/workspace/latex-template.taskfile.yml:ro
+      - ./taskfile.yml:/workspace/taskfile.yml:ro
+      - ./templates/:/workspace/templates/:ro
+      - ./resources/:/workspace/resources/:ro
+      - ./dist/:/workspace/dist/:rw
+    entrypoint: task archive

@@ -2,10 +2,8 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
 {
 	"name": "Latex",
-	"build": {
-		"context": "..",
-		"dockerfile": "Dockerfile"
-	},
+	"initializeCommand": "docker buildx bake dev",
+	"image": "latex-templates-dev",
 
 	"customizations": {
 		"vscode": {

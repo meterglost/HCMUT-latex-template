@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  check:
+    dir: "/{{ .PROJECT_DIR }}"
+    preconditions:
+      - sh: test -f main.tex
+        msg: "Error: project entrypoint main.tex not found ! ({{ .PROJECT_DIR }})"
+
+  compile:
+    desc: "Compile the project"
+    requires:
+      vars:
+        - PROJECT_DIR
+        - PROJECT_NAME
+    dir: "/{{ .PROJECT_DIR }}"
+    label: "{{ .TASK }}:{{ .PROJECT_NAME }}"
+    deps:
+      - task: check
+        vars: { PROJECT_DIR: "{{ .PROJECT_DIR }}" }
+    vars:
+      RESOURCE_DIR: '{{ joinPath .TASKFILE_DIR "resources" }}'
+      COMPILE_DIR: '{{ joinPath .TASKFILE_DIR "build" .PROJECT_NAME }}'
+    preconditions:
+      - test -d {{ .COMPILE_DIR }} || mkdir -p {{ .COMPILE_DIR }}
+    cmds:
+      - tectonic -X --chatter minimal compile {{ .PROJECT_DIR }}/main.tex --outdir {{ .COMPILE_DIR }} -Z shell-escape -Z search-path={{ .RESOURCE_DIR }} --synctex --keep-logs --keep-intermediates
+
+  archive:
+    desc: "Archive the project"
+    requires:
+      vars:
+        - PROJECT_DIR
+        - PROJECT_NAME
+    dir: "/{{ .PROJECT_DIR }}"
+    label: "{{ .TASK }}:{{ .PROJECT_NAME }}"
+    deps:
+      - task: check
+        vars: { PROJECT_DIR: "{{ .PROJECT_DIR }}" }
+    vars:
+      RESOURCE_DIR: '{{ joinPath .TASKFILE_DIR "resources" }}'
+      ARCHIVE_DIR: '{{ joinPath .TASKFILE_DIR "dist" }}'
+    preconditions:
+      - test -d {{ .ARCHIVE_DIR }} || mkdir -p {{ .ARCHIVE_DIR }}
+    cmds:
+      - 7zz a -aoa -bso0 -bsp0 {{ .ARCHIVE_DIR }}/{{ .PROJECT_NAME }}.zip {{ .PROJECT_DIR }}/* {{ .RESOURCE_DIR }}

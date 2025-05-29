@@ -1,0 +1,11 @@
+FROM docker.io/debian:bookworm-slim
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_PRIORITY=critical
+
+ADD https://github.com/go-task/task/releases/latest/download/task_linux_amd64.tar.gz /tmp/task.tar.gz
+RUN tar -xzf /tmp/task.tar.gz -C /usr/local/bin/ && rm /tmp/task.tar.gz
+
+RUN apt-get -qq update && \
+    apt-get -q install -y --no-install-recommends 7zip && \
+    apt-get -qq clean && rm -rf /var/lib/apt/lists/*
