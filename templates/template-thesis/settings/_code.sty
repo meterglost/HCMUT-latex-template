@@ -21,8 +21,21 @@
     % gobble=?,
     %
     breaklines=true,
-    breakafter={,]\}},
-    breakbefore={+-*/\%\#[\{},
+    breakafter={
+        \symbol{32} % space
+        \symbol{44} % ,
+        \symbol{46} % .
+        \symbol{93} % ]
+        \symbol{125} % }
+    },
+    breakbefore={
+        \symbol{43} % +
+        \symbol{45} % -
+        \symbol{42} % *
+        \symbol{47} % /
+        \symbol{91} % [
+        \symbol{123} % {
+    },
     samepage=true,
     %
 }

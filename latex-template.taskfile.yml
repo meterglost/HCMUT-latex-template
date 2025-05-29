@@ -9,6 +9,21 @@ tasks:
       - sh: test -f main.tex
         msg: "Error: project entrypoint main.tex not found ! ({{ .PROJECT_DIR }})"
 
+  format:
+    desc: "Format all files in the project"
+    requires:
+      vars:
+        - PROJECT_DIR
+        - PROJECT_NAME
+    dir: "/{{ .PROJECT_DIR }}"
+    label: "{{ .TASK }}:{{ .PROJECT_NAME }}"
+    deps:
+      - task: check
+        vars: { PROJECT_DIR: "{{ .PROJECT_DIR }}" }
+    cmds:
+      - for: ["*.tex", "*.sty", "*.cls", "*.bib"]
+        cmd: find . -type f -name "{{ .ITEM }}" -exec tex-fmt {} \;
+
   compile:
     desc: "Compile the project"
     requires:

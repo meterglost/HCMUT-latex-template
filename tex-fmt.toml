@@ -1,0 +1,4 @@
+wrap = false
+wraplen = 80
+tabsize = 4
+tabchar = "tab"
