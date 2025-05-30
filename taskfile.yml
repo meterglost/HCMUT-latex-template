@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+vars:
+  WORKSPACE: "{{ .TASKFILE_DIR }}"
+
+includes:
+  latex-template:
+    internal: true
+    taskfile: latex-template.taskfile.yml
+
+tasks:
+  format:*:
+    desc: "Format the template"
+    vars:
+      TEMPLATE_NAME: '{{ index .MATCH 0 }}'
+      TEMPLATE_DIR: '{{ joinPath .WORKSPACE "templates" .TEMPLATE_NAME }}'
+    cmds:
+      - task: latex-template:format
+        vars: { PROJECT_DIR: "{{ .TEMPLATE_DIR }}", PROJECT_NAME: "{{ .TEMPLATE_NAME }}" }
+
+  format:
+    desc: "Format all templates"
+    vars:
+      TEMPLATE_DIRS:
+        sh: echo {{ joinPath .WORKSPACE "templates" }}/*/
+    cmds:
+      - for: { var: TEMPLATE_DIRS }
+        task: format:{{ base .ITEM }}
+
+  compile:*:
+    desc: "Compile the template"
+    vars:
+      TEMPLATE_NAME: '{{ index .MATCH 0 }}'
+      TEMPLATE_DIR: '{{ joinPath .WORKSPACE "templates" .TEMPLATE_NAME }}'
+    cmds:
+      - task: latex-template:compile
+        vars: { PROJECT_DIR: "{{ .TEMPLATE_DIR }}", PROJECT_NAME: "{{ .TEMPLATE_NAME }}" }
+
+  compile:
+    desc: "Compile all templates"
+    vars:
+      TEMPLATE_DIRS:
+        sh: echo {{ joinPath .WORKSPACE "templates" }}/*/
+    cmds:
+      - for: { var: TEMPLATE_DIRS }
+        task: compile:{{ base .ITEM }}
+
+  archive:*:
+    desc: "Archive the template"
+    vars:
+      TEMPLATE_NAME: '{{ index .MATCH 0 }}'
+      TEMPLATE_DIR: '{{ joinPath .WORKSPACE "templates" .TEMPLATE_NAME }}'
+    cmds:
+      - task: latex-template:archive
+        vars: { PROJECT_DIR: "{{ .TEMPLATE_DIR }}", PROJECT_NAME: "{{ .TEMPLATE_NAME }}" }
+
+  archive:
+    desc: "Archive all templates"
+    vars:
+      TEMPLATE_DIRS:
+        sh: echo {{ joinPath .WORKSPACE "templates" }}/*/
+    cmds:
+      - for: { var: TEMPLATE_DIRS }
+        task: archive:{{ base .ITEM }}
+
+  test:compile:
+    desc: "Test compiling the project"
+    cmds:
+      - task: latex-template:compile
+        vars: { PROJECT_DIR: "{{ .USER_WORKING_DIR }}", PROJECT_NAME: "{{ base .USER_WORKING_DIR }}" }
+
+  test:archive:
+    desc: "Test archiving the project"
+    cmds:
+      - task: latex-template:archive
+        vars: { PROJECT_DIR: "{{ .USER_WORKING_DIR }}", PROJECT_NAME: "{{ base .USER_WORKING_DIR }}" }
+
+  test:format:
+    desc: "Test formatting the project"
+    cmds:
+      - task: latex-template:format
+        vars: { PROJECT_DIR: "{{ .USER_WORKING_DIR }}", PROJECT_NAME: "{{ base .USER_WORKING_DIR }}" }
