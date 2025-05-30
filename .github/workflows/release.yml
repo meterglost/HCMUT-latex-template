@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Release workflow
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  dist:
+    uses: ./.github/workflows/dist.yml
+
+  release:
+    name: Upload Release Asset
+    needs: [build, dist]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download compiled templates
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact-url }}
+
+      - name: Download archived templates
+        uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ needs.dist.outputs.artifact_url }}
+
+      - name: Upload as Release assets
+        uses: sekwah41/upload-release-assets@v1.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: |
+            build/*.pdf
+            dist/*.zip
+          asset_content_type: application/octet-stream

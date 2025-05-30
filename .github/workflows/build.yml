@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_call:
+    outputs:
+      artifact-url:
+        description: URL of the uploaded artifact
+        value: ${{ jobs.build.outputs.artifact-url }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-url: ${{ steps.upload-artifact.outputs.artifact-url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/bake-action@v6
+        with:
+          source: .
+          targets: build
+
+      - name: Compile templates
+        run: |
+          docker compose run --rm build
+          for file in build/*/main.pdf; do cp "$file" "${file%/*}.pdf"; done
+
+      - name: Upload artifacts
+        if: ${{ github.event_name == 'workflow_call' }}
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: build/*.pdf
+          overwrite: true
+          if-no-files-found: error

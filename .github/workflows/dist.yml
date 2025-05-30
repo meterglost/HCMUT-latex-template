@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Dist
+
+on:
+  workflow_call:
+    outputs:
+      artifact_url:
+        description: URL of the uploaded artifact
+        value: ${{ jobs.build.outputs.artifact_url }}
+
+jobs:
+  dist:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact_url: ${{ steps.upload_artifact.outputs.artifact_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/bake-action@v6
+        with:
+          source: .
+          targets: dist
+
+      - name: Archive templates
+        run: docker compose run --rm dist
+
+      - name: Upload artifacts
+        if: ${{ github.event_name == 'workflow_call' }}
+        id: upload_artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: dist/*.zip
+          overwrite: true
+          if-no-files-found: error
