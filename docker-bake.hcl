@@ -28,12 +28,18 @@ target "build" {
     tags = [
         "${PROJECT}-build"
     ]
+    output = [
+        { type: "docker" }
+    ]
 }
 
 target "dist" {
     dockerfile = "./.docker/Dockerfile.dist"
     tags = [
         "${PROJECT}-dist"
+    ]
+    output = [
+        { type: "docker" }
     ]
 }
 
